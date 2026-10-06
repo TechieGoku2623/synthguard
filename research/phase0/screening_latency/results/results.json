@@ -1,0 +1,105 @@
+{
+  "blast_rtt": "unmeasured",
+  "cells": [
+    {
+      "indexed_seconds": 0.006548116499971002,
+      "length": 50,
+      "naive_seconds": 0.006682564500124499,
+      "speedup": 1.020532316453761,
+      "volume": 1
+    },
+    {
+      "indexed_seconds": 0.06572214000004806,
+      "length": 50,
+      "naive_seconds": 0.06526544899998044,
+      "speedup": 0.99305118488127,
+      "volume": 10
+    },
+    {
+      "indexed_seconds": 0.17625884599999608,
+      "length": 50,
+      "naive_seconds": 0.16371482749991628,
+      "speedup": 0.9288318357645432,
+      "volume": 25
+    },
+    {
+      "indexed_seconds": 0.007644318999950883,
+      "length": 100,
+      "naive_seconds": 0.007602744999985589,
+      "speedup": 0.9945614514562303,
+      "volume": 1
+    },
+    {
+      "indexed_seconds": 0.07782796550009152,
+      "length": 100,
+      "naive_seconds": 0.07601324250003927,
+      "speedup": 0.9766828929885091,
+      "volume": 10
+    },
+    {
+      "indexed_seconds": 0.1924733234999394,
+      "length": 100,
+      "naive_seconds": 0.19012485899997955,
+      "speedup": 0.9877984935405317,
+      "volume": 25
+    },
+    {
+      "indexed_seconds": 0.001466216500034534,
+      "length": 200,
+      "naive_seconds": 0.0017339680000532098,
+      "speedup": 1.1826138909310935,
+      "volume": 1
+    },
+    {
+      "indexed_seconds": 0.016581421999944723,
+      "length": 200,
+      "naive_seconds": 0.016818143000136843,
+      "speedup": 1.0142762786082464,
+      "volume": 10
+    },
+    {
+      "indexed_seconds": 0.042114077500059466,
+      "length": 200,
+      "naive_seconds": 0.04193995699995412,
+      "speedup": 0.9958655036405558,
+      "volume": 25
+    },
+    {
+      "indexed_seconds": 0.027690776500094216,
+      "length": 400,
+      "naive_seconds": 0.02822784750003393,
+      "speedup": 1.0193953029788778,
+      "volume": 1
+    },
+    {
+      "indexed_seconds": 0.27319333900004494,
+      "length": 400,
+      "naive_seconds": 0.2838706984999817,
+      "speedup": 1.039083527947711,
+      "volume": 10
+    },
+    {
+      "indexed_seconds": 0.678047569499995,
+      "length": 400,
+      "naive_seconds": 0.7149533434999285,
+      "speedup": 1.0544294761312225,
+      "volume": 25
+    }
+  ],
+  "decision": "Local indexed backend is faster on this grid (indexed 1.5656s vs naive 1.5969s total). BLAST vs DIAMOND vs HMM remains deferred. BLAST RTT: unmeasured.",
+  "faster_backend": "indexed",
+  "indexed_total_seconds": 1.5655681115001698,
+  "lengths": [
+    50,
+    100,
+    200,
+    400
+  ],
+  "naive_total_seconds": 1.5969476450001139,
+  "repeats": 2,
+  "volumes": [
+    1,
+    10,
+    25
+  ]
+}

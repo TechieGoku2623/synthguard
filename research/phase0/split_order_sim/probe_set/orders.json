@@ -1,0 +1,113 @@
+{
+  "parent_length": 198,
+  "windows": [
+    {
+      "start": 0,
+      "end": 80
+    },
+    {
+      "start": 30,
+      "end": 110
+    },
+    {
+      "start": 60,
+      "end": 140
+    },
+    {
+      "start": 90,
+      "end": 170
+    },
+    {
+      "start": 118,
+      "end": 198
+    }
+  ],
+  "r001": [
+    {
+      "order_id": "R001-O1",
+      "requester_id": "R001",
+      "sequence": "ATGACGGAGTCCTCTAAGTCTTGCCTAAAGACCGCGAATACGTTGCCAATACTATCAGGCTTGAAGCCCACGTATAGGAA",
+      "header": "R001-frag1 start=0 end=80"
+    },
+    {
+      "order_id": "R001-O2",
+      "requester_id": "R001",
+      "sequence": "ACCGCGAATACGTTGCCAATACTATCAGGCTTGAAGCCCACGTATAGGAACAGGTCGCTTTTAGAAGGTAGCAACGAAGT",
+      "header": "R001-frag2 start=30 end=110"
+    },
+    {
+      "order_id": "R001-O3",
+      "requester_id": "R001",
+      "sequence": "TTGAAGCCCACGTATAGGAACAGGTCGCTTTTAGAAGGTAGCAACGAAGTTAAAGGCTTACATATTGTACCCTGCTTTTC",
+      "header": "R001-frag3 start=60 end=140"
+    },
+    {
+      "order_id": "R001-O4",
+      "requester_id": "R001",
+      "sequence": "TTAGAAGGTAGCAACGAAGTTAAAGGCTTACATATTGTACCCTGCTTTTCCTCCAATGTTATGGATGTTTGGTTCCAGCG",
+      "header": "R001-frag4 start=90 end=170"
+    },
+    {
+      "order_id": "R001-O5",
+      "requester_id": "R001",
+      "sequence": "TACATATTGTACCCTGCTTTTCCTCCAATGTTATGGATGTTTGGTTCCAGCGGACAGTTGAGGGAGCTAATACGGTATAA",
+      "header": "R001-frag5 start=118 end=198"
+    }
+  ],
+  "controls": [
+    {
+      "order_id": "R002-O1",
+      "requester_id": "R002",
+      "sequence": "ATGTGCATATATACATGTACGTATATGTATATGTGTGCATGCGTGTACGCACGCATGCATATGTATACGTACGTATGCAT",
+      "header": "R002 unrelated fragment 1"
+    },
+    {
+      "order_id": "R002-O2",
+      "requester_id": "R002",
+      "sequence": "ATGCATATGCACATACACACGTATGTGTATATATATATATGCATGTATATGCGTATATACATACACACATGTGTATATGT",
+      "header": "R002 unrelated fragment 2"
+    },
+    {
+      "order_id": "R002-O3",
+      "requester_id": "R002",
+      "sequence": "ATATATGCGCATATGCACGTGCATACGTATATGCGCGCGTATATATATATATATGTGCATACGTGCGCATGTATGTATAT",
+      "header": "R002 unrelated fragment 3"
+    },
+    {
+      "order_id": "R003-O1",
+      "requester_id": "R003",
+      "sequence": "GCACATACGCGCACATATACATATGTATACGCGCACATGTACGCGTGCGCACATACGCACGTGCACATGTGCGTATATAC",
+      "header": "R003 unrelated fragment 1"
+    },
+    {
+      "order_id": "R003-O2",
+      "requester_id": "R003",
+      "sequence": "ATATGTACGCATGCACATATGTACACATACGTACATGCATGCATGCGCGTGTATGCACGTGTGCACGCATATGTGTATGT",
+      "header": "R003 unrelated fragment 2"
+    },
+    {
+      "order_id": "R003-O3",
+      "requester_id": "R003",
+      "sequence": "GCATGCACATGCGCACATGTACACGCACGCATGTATGCGTGTGCGTGCGCATGTGTACATACATACGTACATATATACAC",
+      "header": "R003 unrelated fragment 3"
+    },
+    {
+      "order_id": "R004-O1",
+      "requester_id": "R004",
+      "sequence": "GCGCACACGCACGTGTGCGCGCATGTGTGCACGCATACATGCGCACGCACGTACACGCGCGCGCGCACGCATATGCGCGC",
+      "header": "R004 unrelated fragment 1"
+    },
+    {
+      "order_id": "R004-O2",
+      "requester_id": "R004",
+      "sequence": "GCACGTACGCATGCATACATGCGCACGTGTGCGTACGTGCGTACACGCGTGTGTACACGCATGCGTGCGCGCGCACGCAC",
+      "header": "R004 unrelated fragment 2"
+    },
+    {
+      "order_id": "R004-O3",
+      "requester_id": "R004",
+      "sequence": "GTATATACGTACGCACACATATACATACATACACGCGCGCGTGCGCGCGCACATGCGCGCATGCGTGTGCGCGCATACGC",
+      "header": "R004 unrelated fragment 3"
+    }
+  ]
+}

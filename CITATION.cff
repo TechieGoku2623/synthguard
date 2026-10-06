@@ -1,0 +1,6 @@
+cff-version: 1.2.0
+title: synthguard
+message: Detection only. Not a sequence generator.
+type: software
+license: MIT
+version: 0.1.0

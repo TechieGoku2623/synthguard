@@ -1,0 +1,44 @@
+{
+  "control_false_positives": 0,
+  "decision": "Split-order graph is in scope for Phase 2: R001 detected and 0 of 3 control requesters flagged.",
+  "detections": [
+    {
+      "detected": true,
+      "n_edges": 7,
+      "n_fragments": 5,
+      "notes": "Overlapping fragments reconstruct a committed benign parent.",
+      "reconstructed_fraction": 1.0,
+      "requester_id": "R001"
+    },
+    {
+      "detected": false,
+      "n_edges": 0,
+      "n_fragments": 3,
+      "notes": "No reassembly signal at the configured overlap threshold.",
+      "reconstructed_fraction": 0.40404040404040403,
+      "requester_id": "R002"
+    },
+    {
+      "detected": false,
+      "n_edges": 0,
+      "n_fragments": 3,
+      "notes": "No reassembly signal at the configured overlap threshold.",
+      "reconstructed_fraction": 0.40404040404040403,
+      "requester_id": "R003"
+    },
+    {
+      "detected": false,
+      "n_edges": 0,
+      "n_fragments": 3,
+      "notes": "No reassembly signal at the configured overlap threshold.",
+      "reconstructed_fraction": 0.40404040404040403,
+      "requester_id": "R004"
+    }
+  ],
+  "n_controls": 3,
+  "n_requesters": 4,
+  "parent_length": 198,
+  "r001_detected": true,
+  "r001_edges": 7,
+  "r001_reconstructed_fraction": 1.0
+}
