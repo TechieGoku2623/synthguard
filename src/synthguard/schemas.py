@@ -43,12 +43,17 @@ class ScreenResult(BaseModel):
     annotation: Annotation
     best_hit: HomologyHit | None = None
     notes: list[str] = Field(default_factory=list)
+    query_hash: str = ""
+    tier: Literal["auto-clear", "review", "not-screenable"] = "auto-clear"
+    rules: list[str] = Field(default_factory=list)
+    decision_log: list[str] = Field(default_factory=list)
 
 
 class OrderFragment(BaseModel):
     order_id: str
     requester_id: str
     sequence: str
+    source_path: str = ""
 
 
 class SplitDetection(BaseModel):

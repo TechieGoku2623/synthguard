@@ -18,6 +18,9 @@ def test_plasmid_clears_as_known_backbone(tmp_path: Path) -> None:
     assert result.annotation == "known-benign-backbone"
     assert result.max_identity == 1.0
     assert result.would_flag_at_threshold is False
+    assert result.query_hash
+    assert result.tier == "auto-clear"
+    assert result.decision_log
 
 
 def test_housekeep_clears_orf_annotation(tmp_path: Path) -> None:

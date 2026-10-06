@@ -9,4 +9,5 @@ There is no generative component and patches that add one will be rejected.
 - Do not commit, construct, or reference hazardous sequences or sequences of concern.
 - Do not bundle BLAST databases of regulated agents.
 - Do not add a model that proposes edits to a query so that it would clear.
-- Phase 0 uses a local k-mer / identity scorer against a tiny benign reference panel.
+- The local k-mer / identity scorer is measured against a tiny benign reference panel.
+- See `docs/THREAT-MODEL.md` for features that are refused because they would uplift hazardous construction.

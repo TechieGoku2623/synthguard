@@ -29,6 +29,10 @@ class Settings(BaseModel):
     def split_order_dir(self) -> Path:
         return self.sample_dir / "split-orders"
 
+    @property
+    def local_dir(self) -> Path:
+        return self.repo_root / "data" / "local"
+
 
 def get_settings() -> Settings:
     return Settings(

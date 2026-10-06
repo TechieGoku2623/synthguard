@@ -22,10 +22,10 @@ eval:
 	$(UV) run python research/phase0/screening_latency/run.py
 	$(UV) run python research/phase0/split_order_sim/run.py
 	$(UV) run python research/phase0/render_docs.py
+	$(UV) run synthguard eval
 
 demo:
-	$(UV) run synthguard demo-plan --dry-run
+	$(UV) run synthguard demo
 
 record:
-	@echo "Asciinema recordings are a Phase 3 deliverable (demo/*.cast)."
-	@echo "Phase 0 has no screen CLI to record."
+	$(UV) run python -c "from synthguard.recordings import record_all; print(*record_all(), sep='\n')"
