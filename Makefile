@@ -1,7 +1,7 @@
 export PATH := $(HOME)/.local/bin:$(PATH)
 UV ?= uv
 
-.PHONY: setup lint test research eval demo record
+.PHONY: demo-shots setup lint test research eval demo record
 
 setup:
 	$(UV) sync --extra dev
@@ -27,5 +27,9 @@ eval:
 demo:
 	$(UV) run synthguard demo
 
+demo-shots:
+	$(UV) run --with pyyaml python demo/verify_shots.py
+
 record:
-	$(UV) run python -c "from synthguard.recordings import record_all; print(*record_all(), sep='\n')"
+	bash demo/record.sh
+	bash demo/render.sh

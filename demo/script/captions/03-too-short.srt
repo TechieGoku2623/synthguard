@@ -1,0 +1,4 @@
+1
+00:00:04,307 --> 00:00:14,310
+NOT SCREENABLE is distinct from clear — conflating them is
+the danger

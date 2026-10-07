@@ -26,7 +26,7 @@ from synthguard.screen import screen_fasta_path
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 orders_app = typer.Typer(no_args_is_help=True, add_completion=False)
 app.add_typer(orders_app, name="orders")
-console = Console(width=140)
+console = Console(width=100)
 
 SAMPLES: tuple[SampleCase, ...] = (
     SampleCase(
@@ -78,9 +78,10 @@ def _disclaimer() -> None:
     console.print(SAFETY_DISCLAIMER)
 
 
-def _print_result(result: ScreenResult, explain: bool) -> None:
+def _print_result(result: ScreenResult, explain: bool, summary: bool = False) -> None:
     console.print(f"query: {result.query_id}")
-    console.print(f"query_hash: {result.query_hash}")
+    if not summary:
+        console.print(f"query_hash: {result.query_hash}")
     console.print(f"status: {result.status}  tier: {result.tier}  exit: {result.exit_code}")
     console.print(
         f"length: {result.length}  min_length: {result.min_length}  "
@@ -93,12 +94,13 @@ def _print_result(result: ScreenResult, explain: bool) -> None:
         )
     else:
         console.print("hit: none")
-    console.print("rules:")
-    for rule in result.rules:
-        console.print(f"  - {rule}")
-    console.print("decision log:")
-    for line in result.decision_log:
-        console.print(f"  {line}")
+    if not summary:
+        console.print("rules:")
+        for rule in result.rules:
+            console.print(f"  - {rule}")
+        console.print("decision log:")
+        for line in result.decision_log:
+            console.print(f"  {line}")
     if explain:
         console.print("[bold]explain[/bold]")
         if result.status == "NOT_SCREENABLE":
@@ -121,22 +123,23 @@ def _print_result(result: ScreenResult, explain: bool) -> None:
             )
     if result.status == "NOT_SCREENABLE":
         console.print("NOT SCREENABLE — this query does NOT clear.")
-    queue = Table(title="Reviewer queue (above auto-clear)")
-    queue.add_column("query")
-    queue.add_column("tier")
-    queue.add_column("reason")
-    if result.tier != "auto-clear":
-        reason = (
-            f"measured {result.length} < min {result.min_length}"
-            if result.status == "NOT_SCREENABLE"
-            else result.annotation
-        )
-        queue.add_row(result.query_id, result.tier, reason)
-        console.print(queue)
-    else:
-        console.print("Reviewer queue: empty (auto-clear).")
-    for note in result.notes:
-        console.print(f"  note: {note}")
+    if not summary:
+        queue = Table(title="Reviewer queue (above auto-clear)")
+        queue.add_column("query")
+        queue.add_column("tier")
+        queue.add_column("reason")
+        if result.tier != "auto-clear":
+            reason = (
+                f"measured {result.length} < min {result.min_length}"
+                if result.status == "NOT_SCREENABLE"
+                else result.annotation
+            )
+            queue.add_row(result.query_id, result.tier, reason)
+            console.print(queue)
+        else:
+            console.print("Reviewer queue: empty (auto-clear).")
+        for note in result.notes:
+            console.print(f"  note: {note}")
 
 
 @app.command("version")
@@ -177,7 +180,7 @@ def sample_path() -> None:
     console.print(str(get_settings().sample_dir.resolve()))
 
 
-def run_screen(fasta: Path, explain: bool = False) -> int:
+def run_screen(fasta: Path, explain: bool = False, summary: bool = False) -> int:
     settings = get_settings()
     path = fasta if fasta.is_file() else settings.sample_dir / fasta.name
     if not path.is_file():
@@ -187,7 +190,7 @@ def run_screen(fasta: Path, explain: bool = False) -> int:
     results = screen_fasta_path(path)
     exit_code = 0
     for result in results:
-        _print_result(result, explain=explain)
+        _print_result(result, explain=explain, summary=summary)
         if result.status != "CLEAR":
             console.print("CLEAR: no")
         else:
@@ -201,10 +204,11 @@ def run_screen(fasta: Path, explain: bool = False) -> int:
 def screen(
     fasta: Annotated[Path, typer.Option("--fasta", help="FASTA query path")],
     explain: bool = typer.Option(False, "--explain"),
+    summary: bool = typer.Option(False, "--summary", help="Skip decision log and notes"),
 ) -> None:
     """Screen a FASTA query. Detection only. Never rewrites the sequence."""
 
-    raise typer.Exit(code=run_screen(fasta, explain=explain))
+    raise typer.Exit(code=run_screen(fasta, explain=explain, summary=summary))
 
 
 @orders_app.command("ingest")
@@ -236,6 +240,9 @@ def orders_analyze(
 
     settings = get_settings()
     store = default_store_path(settings.repo_root)
+    if not store.is_file():
+        fragments = ingest_directory(settings.split_order_dir)
+        write_store(store, fragments)
     fragments = read_store(store)
     detection = analyze_requester(fragments, requester)
     console.print("[bold]synthguard orders analyze[/bold]")
@@ -269,9 +276,24 @@ def orders_analyze(
 
 
 @app.command("eval")
-def eval_cmd() -> None:
+def eval_cmd(
+    summary: bool = typer.Option(False, "--summary", help="Four-row FPR table only"),
+) -> None:
     """Print FP/FN tradeoff on the benign corpus plus screening latency."""
 
+    if summary:
+        path = get_settings().repo_root / "docs" / "EVALUATION.md"
+        n = 0
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("# Evaluation"):
+                continue
+            console.print(line[:100])
+            if line.strip():
+                n += 1
+            if n >= 14:
+                break
+        _disclaimer()
+        return
     rows, elapsed, n = tradeoff_rows()
     console.print(format_tradeoff(rows, elapsed, n))
     _disclaimer()

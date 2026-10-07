@@ -1,0 +1,39 @@
+title: synthguard
+tagline: Open screening gateway for DNA synthesis orders — detection only
+problem:
+  - Every sequence on screen is benign. No regulated sequence is shown.
+  - Synthesis screening is proprietary, inconsistent, and unauditable.
+  - There is almost no open tooling on the screening side.
+shots:
+  - id: 01-screen
+    command: synthguard screen --fasta data/sample/plasmid.fa
+    caption: Every decision is logged with the evidence that produced it
+    hold: 3.0
+    failure_beat: false
+  - id: 02-near-miss
+    command: synthguard screen --fasta data/sample/near-miss.fa --explain --summary
+    caption: High homology to a benign relative — threshold vs identity shown
+    hold: 4.0
+    highlight: "threshold vs identity|identity"
+    failure_beat: false
+  - id: 03-too-short
+    command: synthguard screen --fasta data/sample/too-short.fa
+    caption: NOT SCREENABLE is distinct from clear — conflating them is the danger
+    hold: 4.0
+    highlight: "NOT SCREENABLE"
+    failure_beat: true
+    expect_exit: 1
+  - id: 04-reassembly
+    command: synthguard orders analyze --requester R001
+    caption: Five benign fragments from one requester reassemble with overlap
+    hold: 4.5
+    highlight: "REASSEMBLY|detected"
+    failure_beat: false
+results:
+  command: synthguard eval --summary
+  caption: The false-positive curve across thresholds, published not hidden
+  hold: 6.0
+end_card:
+  url: github.com/techiegoku2623/synthguard
+  license: MIT
+gif_beat: 04-reassembly
